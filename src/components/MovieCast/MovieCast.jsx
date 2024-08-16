@@ -10,7 +10,6 @@ const MovieCast = ({ movieId }) => {
       try {
         setIsLoading(true);
         const response = await movieCast(movieId);
-        console.log(response)
         setMovieCast(response.data.cast);
       } catch (error) {
         throw new Error(error.message);
