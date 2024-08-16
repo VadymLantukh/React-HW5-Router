@@ -5,14 +5,13 @@ const MovieList = ({ movies }) => {
     <div>
       <ul>
         {movies.map(movie => {
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
-              <img src={movie.poster_path} alt={movie.title} />
-              <h3>{movie.title}</h3>
-            </Link>
-          </li>;
-          console.log(movie);
-          console.log(movie.poster_path);
+          return (
+            <li key={movie.id}>
+              <Link to={`/movies/${movie.id.toString()}`}>
+                <h3>{movie.title}</h3>
+              </Link>
+            </li>
+          );
         })}
       </ul>
     </div>
