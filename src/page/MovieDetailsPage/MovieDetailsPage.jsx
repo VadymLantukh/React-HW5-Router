@@ -6,15 +6,18 @@ import MovieReviews from '../../components/MovieReviews/MovieReviews';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  const [movie, setMovies] = useState([]);
+  const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const imageUrl = movie
+    ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
+    : 'Not found poster';
 
   useEffect(() => {
     const fetchMoviesDetails = async () => {
       try {
         setIsLoading(true);
         const response = await movieDetails(movieId);
-        setMovies(response.data);
+        setMovie(response.data);
       } catch (error) {
         throw new Error(error.message);
       } finally {
@@ -25,21 +28,39 @@ const MovieDetailsPage = () => {
     fetchMoviesDetails();
   }, [movieId]);
 
-  isLoading && <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
   if (!movie) return <div>Movie not found</div>;
-  
-    const imageUrl = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
 
   return (
-    <div>
-      <img src={imageUrl} alt="asd" />
-
+    <>
       <Link to="/">Go Home</Link>
-      <Routes>
-        <Route path="cast" element={<MovieCast movieId={movieId} />} />
-        <Route path="reviews" element={<MovieReviews movieId={movieId} />} />
-      </Routes>
-    </div>
+      <div>
+        <img src={imageUrl} alt={movie.original_title} />
+        <div>
+          <h2>{`${movie.original_title}: (${movie.release_date})`}</h2>
+          <p>{`Vote average: ${movie.vote_average.toFixed(1)}`}</p>
+          <h3>Overview</h3>
+          <p>{movie.overview}</p>
+          <h3>Genres</h3>
+          <p>{movie.genres.map(genre => genre.name).join(', ')}</p>
+        </div>
+        <div>
+          <p>Additional information</p>
+          <ul>
+            <li>
+              <Link to={`/movie/${movieId}/cast`}>Cast</Link>
+            </li>
+            <li>
+              <Link to="reviews">Reviews</Link>
+            </li>
+          </ul>
+        </div>
+        <Routes>
+          <Route path="cast" element={<MovieCast movieId={movieId} />} />
+          <Route path="reviews" element={<MovieReviews movieId={movieId} />} />
+        </Routes>
+      </div>
+    </>
   );
 };
 
