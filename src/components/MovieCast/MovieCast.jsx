@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { movieCast } from '../../service/api';
+import css from './MovieCast.module.css';
 
 const MovieCast = ({ movieId }) => {
   const [movieCats, setMovieCast] = useState([]);
@@ -23,10 +24,10 @@ const MovieCast = ({ movieId }) => {
   isLoading && <p>Loading movie cats...</p>;
 
   return (
-    <ul>
+    <ul className={css.listCast}>
       {movieCats.map(actor => {
         return (
-          <li key={actor.id}>
+          <li className={css.itemCast} key={actor.id}>
             {' '}
             {actor.profile_path ? (
               <img
@@ -37,7 +38,7 @@ const MovieCast = ({ movieId }) => {
               <p>Not found Available</p>
             )}
             <p>{actor.name}</p>
-            <p>Character: {actor.character}</p>
+            <p className={css.character}>Character: {actor.character}</p>
           </li>
         );
       })}

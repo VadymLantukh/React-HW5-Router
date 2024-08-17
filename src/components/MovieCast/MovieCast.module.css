@@ -1,0 +1,23 @@
+.listCast {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+  padding: 10px;
+}
+
+.itemCast {
+  text-align: center;
+  margin-bottom: 10px;
+  border: 2px solid rgb(233, 123, 123);
+  cursor: pointer;
+  transition: transform 300ms linear;
+}
+
+.itemCast:hover {
+  transform: scale(1.05);
+}
+
+.character {
+  width: 200px;
+}

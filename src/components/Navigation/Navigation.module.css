@@ -1,0 +1,18 @@
+.navBox {
+  display: flex;
+  justify-content: center;
+  gap: 62px;
+  margin-bottom: 16px;
+  padding: 20px 0;
+}
+
+.navBox > a {
+  font-size: 20px;
+  padding: 3px 6px;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 10px;
+}
+
+.active {
+  color: rgb(233, 123, 123);
+}

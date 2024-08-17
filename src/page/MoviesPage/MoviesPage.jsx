@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { searchMovies } from '../../service/api';
 import MovieList from '../../components/MovieList/MovieList';
+import css from './MoviesPage.module.css';
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,15 +25,16 @@ const MoviesPage = () => {
   };
 
   return (
-    <div>
+    <div className={css.boxSearchPage}>
       <form onSubmit={handleSubmit}>
         <input
+          className={css.inputSearch}
           type="text"
           name="query"
           defaultValue={query}
           placeholder="Search..."
         />
-        <button type="submit">Search</button>
+        <button className={ css.btnSearch} type="submit">Search</button>
       </form>
 
       <MovieList movies={movies} />

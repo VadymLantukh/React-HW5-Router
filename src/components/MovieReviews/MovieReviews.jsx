@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { movieReviews } from '../../service/api';
+import css from './MovieReviews.module.css'
 
 const MovieReviews = ({ movieId }) => {
   const [reviews, setreviews] = useState([]);
@@ -24,10 +25,10 @@ const MovieReviews = ({ movieId }) => {
   isLoading && <p>Loading...</p>;
 
   return (
-    <ul>
+    <ul className={ css.reviewsList}>
       {reviews.length > 0 ? (
         reviews.map(review => (
-          <li key={review.key}>
+          <li className={css.reviewsItem} key={review.key}>
             <h3>Author: {review.author}</h3>
             <p>{review.content}</p>
           </li>
