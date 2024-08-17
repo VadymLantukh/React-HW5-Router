@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { movieCast } from '../../service/api';
 import css from './MovieCast.module.css';
+import { useParams } from 'react-router-dom';
 
-const MovieCast = ({ movieId }) => {
+const MovieCast = () => {
+  const { movieId } = useParams();
   const [movieCats, setMovieCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchMovieCast = async () => {
+      if (!movieId) return;
       try {
         setIsLoading(true);
         const response = await movieCast(movieId);

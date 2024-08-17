@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { fetchMovie } from '../../service/api';
 import MovieList from '../../components/MovieList/MovieList';
-import css from './HomePage.module.css'
+import css from './HomePage.module.css';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -27,14 +27,18 @@ const HomePage = () => {
     fetchTredingMovies();
   }, []);
 
-  isLoading && <p>Loadling...</p>;
-  isError && (
-    <p>
-      Sorry for the temporary inconvenience.
-      <br />
-      please reload the page or try again
-    </p>
-  );
+  {
+    isLoading && <p>Loadling...</p>;
+  }
+  {
+    isError && (
+      <p>
+        Sorry for the temporary inconvenience.
+        <br />
+        please reload the page or try again
+      </p>
+    );
+  }
 
   return (
     <div className={css.boxHomePage}>

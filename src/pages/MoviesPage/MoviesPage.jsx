@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { searchMovies } from '../../service/api';
 import MovieList from '../../components/MovieList/MovieList';
@@ -9,19 +9,32 @@ const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
   const query = searchParams.get('query') ?? '';
 
-  const handleSubmit = async evt => {
+  useEffect(() => {
+    const fetchMovies = async () => {
+      if (!query) return;
+
+      try {
+        const response = await searchMovies(query);
+        setMovies(response.data.results);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    };
+
+    fetchMovies();
+  }, [query]);
+
+  const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.currentTarget;
-    const searchQuery = form.elements.query.value;
+    const searchQuery = form.elements.query.value.trim();
+
+    if (searchQuery === '') {
+      return;
+    }
+
     setSearchParams({ query: searchQuery });
     form.reset();
-
-    try {
-      const response = await searchMovies(searchQuery);
-      setMovies(response.data.results);
-    } catch (error) {
-      throw new Error(error.message);
-    }
   };
 
   return (
@@ -34,7 +47,9 @@ const MoviesPage = () => {
           defaultValue={query}
           placeholder="Search..."
         />
-        <button className={ css.btnSearch} type="submit">Search</button>
+        <button className={css.btnSearch} type="submit">
+          Search
+        </button>
       </form>
 
       <MovieList movies={movies} />

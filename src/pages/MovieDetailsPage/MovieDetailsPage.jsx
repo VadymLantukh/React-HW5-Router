@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Link, Route, Routes, useParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { movieDetails } from '../../service/api';
-import MovieCast from '../../components/MovieCast/MovieCast';
-import MovieReviews from '../../components/MovieReviews/MovieReviews';
 import css from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
@@ -12,6 +10,7 @@ const MovieDetailsPage = () => {
   const imageUrl = movie
     ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
     : 'Not found poster';
+  const backLocation = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     const fetchMoviesDetails = async () => {
@@ -29,12 +28,16 @@ const MovieDetailsPage = () => {
     fetchMoviesDetails();
   }, [movieId]);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!movie) return <div>Movie not found</div>;
+  {
+    if (isLoading) return <p>Loading...</p>;
+  }
+  {
+    if (!movie) return <div>Movie not found</div>;
+  }
 
   return (
     <>
-      <Link className={css.linkBack} to="/">
+      <Link className={css.linkBack} to={backLocation.current}>
         Go-back
       </Link>
       <div>
@@ -57,29 +60,19 @@ const MovieDetailsPage = () => {
             <h3 className={css.titleInformation}>Additional information</h3>
             <ul className={css.listInformation}>
               <li>
-                <Link
-                  className={css.linkInformation}
-                  to={`/movies/${movieId}/cast`}
-                >
+                <Link className={css.linkInformation} to={'cast'}>
                   Cast
                 </Link>
               </li>
               <li>
-                <Link
-                  className={css.linkInformation}
-                  to={`/movies/${movieId}/reviews`}
-                >
+                <Link className={css.linkInformation} to={'reviews'}>
                   Reviews
                 </Link>
               </li>
             </ul>
           </div>
+          <Outlet />
         </div>
-
-        <Routes>
-          <Route path="cast" element={<MovieCast movieId={movieId} />} />
-          <Route path="reviews" element={<MovieReviews movieId={movieId} />} />
-        </Routes>
       </div>
     </>
   );

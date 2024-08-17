@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { movieReviews } from '../../service/api';
-import css from './MovieReviews.module.css'
+import css from './MovieReviews.module.css';
+import { useParams } from 'react-router-dom';
 
-const MovieReviews = ({ movieId }) => {
+const MovieReviews = () => {
+  const { movieId } = useParams();
   const [reviews, setreviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,7 +27,7 @@ const MovieReviews = ({ movieId }) => {
   isLoading && <p>Loading...</p>;
 
   return (
-    <ul className={ css.reviewsList}>
+    <ul className={css.reviewsList}>
       {reviews.length > 0 ? (
         reviews.map(review => (
           <li className={css.reviewsItem} key={review.id}>
