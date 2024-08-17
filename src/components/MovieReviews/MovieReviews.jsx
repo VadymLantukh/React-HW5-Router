@@ -28,7 +28,7 @@ const MovieReviews = ({ movieId }) => {
     <ul className={ css.reviewsList}>
       {reviews.length > 0 ? (
         reviews.map(review => (
-          <li className={css.reviewsItem} key={review.key}>
+          <li className={css.reviewsItem} key={review.id}>
             <h3>Author: {review.author}</h3>
             <p>{review.content}</p>
           </li>
