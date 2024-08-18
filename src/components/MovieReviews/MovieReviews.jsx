@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { movieReviews } from '../../service/api';
 import css from './MovieReviews.module.css';
 import { useParams } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 
 const MovieReviews = () => {
   const { movieId } = useParams();
@@ -25,7 +26,11 @@ const MovieReviews = () => {
   }, [movieId]);
 
   {
-    isLoading && <p>Loading...</p>;
+    isLoading && (
+      <div className={css.iconLoader}>
+        <ClipLoader color="fafafa" />
+      </div>
+    );
   }
 
   return (

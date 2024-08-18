@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { fetchMovie } from '../../service/api';
 import MovieList from '../../components/MovieList/MovieList';
 import css from './HomePage.module.css';
+import { ClipLoader } from 'react-spinners';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -28,7 +29,11 @@ const HomePage = () => {
   }, []);
 
   {
-    isLoading && <p>Loadling...</p>;
+    isLoading && (
+      <div className={css.iconLoader}>
+        <ClipLoader color="fafafa" />
+      </div>
+    );
   }
   {
     isError && (

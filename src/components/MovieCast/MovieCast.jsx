@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { movieCast } from '../../service/api';
 import css from './MovieCast.module.css';
 import { useParams } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 
 const MovieCast = () => {
   const { movieId } = useParams();
@@ -24,7 +25,13 @@ const MovieCast = () => {
     fetchMovieCast();
   }, [movieId]);
 
-  isLoading && <p>Loading movie cats...</p>;
+  {
+    isLoading && (
+      <div className={css.iconLoader}>
+        <ClipLoader color="fafafa" />
+      </div>
+    );
+  }
 
   return (
     <ul className={css.listCast}>

@@ -21,3 +21,8 @@
 .character {
   width: 200px;
 }
+
+.iconLoader {
+  display: flex;
+  justify-content: center;
+}

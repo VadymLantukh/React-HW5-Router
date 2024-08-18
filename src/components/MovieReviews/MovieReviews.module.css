@@ -11,3 +11,8 @@
   border-radius: 10px;
   margin-bottom: 26px;
 }
+
+.iconLoader {
+  display: flex;
+  justify-content: center;
+}

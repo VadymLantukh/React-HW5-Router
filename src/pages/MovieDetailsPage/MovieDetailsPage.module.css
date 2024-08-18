@@ -75,3 +75,8 @@
   color: rgb(233, 123, 123);
   transform: scale(1.05);
 }
+
+.iconLoader {
+  display: flex;
+  justify-content: center;
+}

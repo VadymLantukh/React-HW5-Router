@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useParams } from 'react-router-dom';
 import { movieDetails } from '../../service/api';
 import css from './MovieDetailsPage.module.css';
+import { ClipLoader } from 'react-spinners';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -29,7 +30,12 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   {
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading)
+      return (
+        <div className={css.iconLoader}>
+          <ClipLoader color="fafafa" />
+        </div>
+      );
   }
   {
     if (!movie) return <div>Movie not found</div>;

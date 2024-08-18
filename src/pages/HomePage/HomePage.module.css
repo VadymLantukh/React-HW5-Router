@@ -9,3 +9,8 @@
   margin-bottom: 14px;
   color: rgb(233, 123, 123);
 }
+
+.iconLoader {
+  display: flex;
+  justify-content: center;
+}
