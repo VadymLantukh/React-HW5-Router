@@ -24,7 +24,9 @@ const MovieReviews = () => {
     fetchReviews();
   }, [movieId]);
 
-  isLoading && <p>Loading...</p>;
+  {
+    isLoading && <p>Loading...</p>;
+  }
 
   return (
     <ul className={css.reviewsList}>

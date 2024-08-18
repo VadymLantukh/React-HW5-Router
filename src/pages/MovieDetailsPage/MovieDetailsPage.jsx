@@ -10,7 +10,7 @@ const MovieDetailsPage = () => {
   const imageUrl = movie
     ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
     : 'Not found poster';
-  const backLocation = useRef(location.state?.from ?? '/');
+  const backLocation = useRef(location.state ?? '/');
 
   useEffect(() => {
     const fetchMoviesDetails = async () => {
