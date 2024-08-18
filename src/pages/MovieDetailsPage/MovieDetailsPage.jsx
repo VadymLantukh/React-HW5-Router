@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { movieDetails } from '../../service/api';
 import css from './MovieDetailsPage.module.css';
 import { ClipLoader } from 'react-spinners';
@@ -8,10 +8,11 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
   const imageUrl = movie
     ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
     : 'Not found poster';
-  const backLocation = useRef(location.state ?? '/');
+  const backLocation = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     const fetchMoviesDetails = async () => {

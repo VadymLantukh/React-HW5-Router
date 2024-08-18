@@ -25,34 +25,34 @@ const MovieCast = () => {
     fetchMovieCast();
   }, [movieId]);
 
-  {
-    isLoading && (
-      <div className={css.iconLoader}>
-        <ClipLoader color="fafafa" />
-      </div>
-    );
-  }
-
   return (
-    <ul className={css.listCast}>
-      {movieCats.map(actor => {
-        return (
-          <li className={css.itemCast} key={actor.id}>
-            {' '}
-            {actor.profile_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-                alt={actor.name}
-              />
-            ) : (
-              <p>Not found Available</p>
-            )}
-            <p>{actor.name}</p>
-            <p className={css.character}>Character: {actor.character}</p>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      {isLoading ? (
+        <div className={css.iconLoader}>
+          <ClipLoader color="fafafa" />
+        </div>
+      ) : (
+        <ul className={css.listCast}>
+          {movieCats.map(actor => {
+            return (
+              <li className={css.itemCast} key={actor.id}>
+                {' '}
+                {actor.profile_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                    alt={actor.name}
+                  />
+                ) : (
+                  <p>Not found Available</p>
+                )}
+                <p>{actor.name}</p>
+                <p className={css.character}>Character: {actor.character}</p>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </>
   );
 };
 
